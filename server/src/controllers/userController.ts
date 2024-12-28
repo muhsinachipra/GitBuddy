@@ -27,6 +27,9 @@ export const saveUser = async (req: Request, res: Response) => {
             blog: userResponse.data.blog,
             followers: followersResponse.data.map((f: any) => f.login),
             following: followingResponse.data.map((f: any) => f.login),
+            publicRepos: userResponse.data.public_repos,
+            publicGists: userResponse.data.public_gists,
+            joined: new Date(userResponse.data.created_at),
         };
 
         // Save user to the database

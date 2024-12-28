@@ -10,6 +10,9 @@ interface IUser extends Document {
     followers: string[];
     following: string[];
     friends: string[];
+    publicRepos: number; // Store the number of public repos
+    publicGists: number; // Store the number of public gists
+    joined: Date;
     isDeleted: boolean;
 }
 
@@ -24,6 +27,9 @@ const UserSchema = new Schema<IUser>(
         followers: [{ type: String }],
         following: [{ type: String }],
         friends: [{ type: String }],
+        publicRepos: { type: Number, default: 0 }, // Add the publicRepos field
+        publicGists: { type: Number, default: 0 }, // Add the publicGists 
+        joined: { type: Date },
         isDeleted: { type: Boolean, default: false },
     },
     { timestamps: true }
