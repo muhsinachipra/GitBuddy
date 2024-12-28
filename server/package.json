@@ -11,10 +11,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/joi": "^17.2.3",
     "axios": "^1.7.9",
     "body-parser": "^1.20.3",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "joi": "^17.13.3",
     "mongoose": "^8.9.2"
   },
   "devDependencies": {
