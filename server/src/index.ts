@@ -1,12 +1,19 @@
 import express from 'express';
+import { connectToDatabase } from './config/database';
+import { env } from './config/env';
 
 const app = express();
-const PORT = 3000;
 
-app.get('/', (req, res) => {
-  res.send('Hello, World!');
+app.use(express.json());
+
+// Connect to the database
+connectToDatabase().then(() => {
+  app.listen(env.PORT, () => {
+    console.log(`Server is running on port ${env.PORT}`);
+  });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+// Define a simple route
+app.get('/', (req, res) => {
+  res.send('API is running...');
 });
