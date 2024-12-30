@@ -77,3 +77,20 @@ export const softDeleteUser = async (req: Request, res: Response) => {
     }
 };
 
+export const updateUser = async (req: Request, res: Response) => {
+    const { username } = req.params;
+    const updates = req.body;
+
+    try {
+        const user = await User.findOneAndUpdate({ username }, updates, { new: true });
+        if (!user) {
+            res.status(404).json({ message: 'User not found' });
+            return
+        } else {
+            res.status(200).json(user);
+        }
+    } catch (error) {
+        console.error('Error updating user:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
