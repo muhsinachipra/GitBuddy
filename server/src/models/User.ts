@@ -2,6 +2,7 @@ import mongoose, { Schema, model, Document } from 'mongoose';
 
 interface IUser extends Document {
     username: string;
+    name: string;
     githubId: string;
     avatarUrl: string;
     location?: string;
@@ -19,6 +20,7 @@ interface IUser extends Document {
 const UserSchema = new Schema<IUser>(
     {
         username: { type: String, required: true, unique: true },
+        name: { type: String, required: true },
         githubId: { type: String, required: true, unique: true },
         avatarUrl: { type: String, required: true },
         location: { type: String },
