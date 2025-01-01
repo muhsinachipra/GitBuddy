@@ -1,0 +1,19 @@
+.home-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.user-input {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  gap: 10px;
+}
+
+.user-input input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
