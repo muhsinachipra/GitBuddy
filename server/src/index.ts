@@ -9,17 +9,14 @@ const app = express();
 
 app.use(express.json());
 
-// Routes
 app.use('/api', userRoutes);
 
-// Connect to the database
 connectToDatabase().then(() => {
   app.listen(env.PORT, () => {
     console.log(`Server is running on port ${env.PORT}`);
   });
 });
 
-// Define a simple route
 app.get('/', (req, res) => {
   res.send('API is running...');
 });
