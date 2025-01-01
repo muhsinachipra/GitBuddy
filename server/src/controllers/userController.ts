@@ -44,15 +44,17 @@ export const saveUser = async (req: Request, res: Response, next: NextFunction):
     }
 };
 
-// Search for users
+
 export const searchUsers = async (req: Request, res: Response) => {
     const { username, location } = req.query;
 
     try {
-        const searchCriteria: SearchCriteria = { isDeleted: false };
+        const searchCriteria: any = { isDeleted: false };
 
         if (username) searchCriteria['username'] = username as string;
-        if (location) searchCriteria['location'] = location as string;
+        if (location) {
+            searchCriteria['location'] = { $regex: new RegExp(location as string, 'i') };
+        }
 
         const users = await User.find(searchCriteria);
         res.status(200).json(users);
@@ -61,6 +63,7 @@ export const searchUsers = async (req: Request, res: Response) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 };
+
 
 export const softDeleteUser = async (req: Request, res: Response) => {
     const { username } = req.params;
