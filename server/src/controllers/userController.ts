@@ -94,3 +94,22 @@ export const updateUser = async (req: Request, res: Response) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 };
+
+
+export const getSortedUsers = async (req: Request, res: Response) => {
+    const { sortBy } = req.query;
+
+    try {
+        const validFields = ['public_repos', 'public_gists', 'followers', 'following', 'created_at', 'joined'];
+        if (!validFields.includes(sortBy as string)) {
+            res.status(400).json({ message: 'Invalid sort field' });
+            return
+        } else {
+            const users = await User.find({ isDeleted: false }).sort({ [sortBy as string]: -1 });
+            res.status(200).json(users);
+        }
+    } catch (error) {
+        console.error('Error fetching sorted users:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
